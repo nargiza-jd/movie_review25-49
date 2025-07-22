@@ -11,5 +11,9 @@ spring:
       mode: always
 
 
+  liquibase:
+    change-log: classpath:/db/changelog/master.yaml
+
+
 server:
   port: 8089
