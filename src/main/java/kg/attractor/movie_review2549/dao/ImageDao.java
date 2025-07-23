@@ -46,4 +46,17 @@ public class ImageDao {
                 )
         );
     }
+
+    public Optional<Image> findByMovieId(long movieId) {
+        String sql = "select * from movie_images where movie_id=?";
+        return Optional.ofNullable(
+                DataAccessUtils.singleResult(
+                        jdbcTemplate.query(
+                                sql,
+                                new BeanPropertyRowMapper<>(Image.class),
+                                movieId
+                        )
+                )
+        );
+    }
 }

@@ -54,7 +54,7 @@ public interface ImageService {
         }
     }
 
-    ResponseEntity<?> getById(long id);
+    ResponseEntity<?> getByMovieId(long id);
 
     void create(ImageDto imageDto);
 }

@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class Image {
     private Long id;
-    private String filename;
+    private String fileName;
     private Long movieId;
 }

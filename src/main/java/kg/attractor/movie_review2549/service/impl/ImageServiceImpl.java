@@ -1,24 +1,36 @@
 package kg.attractor.movie_review2549.service.impl;
 
 import kg.attractor.movie_review2549.dao.ImageDao;
+import kg.attractor.movie_review2549.dao.MovieDao;
 import kg.attractor.movie_review2549.dto.ImageDto;
 import kg.attractor.movie_review2549.exceptions.ImageNotFoundException;
+import kg.attractor.movie_review2549.exceptions.MovieNotFoundException;
+import kg.attractor.movie_review2549.model.Image;
+import kg.attractor.movie_review2549.model.Movie;
 import kg.attractor.movie_review2549.service.ImageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
     private final ImageDao imageDao;
+    private final MovieDao movieDao;
 
     @Override
-    public ResponseEntity<?> getById(long id) {
-        var image = imageDao.findById(id)
+    public ResponseEntity<?> getByMovieId(long movieId) {
+        Movie movie = movieDao.getMovieById(movieId)
+                .orElseThrow(() -> {
+                    log.error("No movie found for id: " + movieId);
+                    throw new MovieNotFoundException();
+                });
+        Image image = imageDao.findByMovieId(movie.getId())
                 .orElseThrow(ImageNotFoundException::new);
-        return downloadFile(image.getFilename(), "images", MediaType.IMAGE_JPEG);
+        return downloadFile(image.getFileName(), "images", MediaType.IMAGE_JPEG);
     }
 
     @Override
