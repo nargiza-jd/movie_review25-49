@@ -1,7 +1,7 @@
 package kg.attractor.movie_review2549.exceptions;
 
-public class UserNotFoundException extends RuntimeException {
+public class UserNotFoundException extends NotFoundException {
     public UserNotFoundException() {
-        super("User not found");
+        super("User");
     }
 }
