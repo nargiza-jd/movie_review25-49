@@ -22,7 +22,7 @@ public class ErrorServiceImpl implements ErrorService {
                 .forEach(e -> {
                     List<String> errors = new ArrayList<>();
                     errors.add(e.getDefaultMessage());
-                    if (reasons.containsKey(e.getField())) {
+                    if (!reasons.containsKey(e.getField())) {
                         reasons.put(e.getField(), errors);
                     }
                 });
