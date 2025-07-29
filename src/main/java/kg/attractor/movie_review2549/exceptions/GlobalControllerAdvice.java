@@ -15,8 +15,8 @@ public class GlobalControllerAdvice {
     private final ErrorService errorService;
 
     @ExceptionHandler(NotFoundException.class)
-    public ErrorResponse handleNotFoundException(NotFoundException ex) {
-        return ErrorResponse.builder(ex, HttpStatus.NOT_FOUND, ex.getMessage()).build();
+    public ResponseEntity<ErrorResponseBody> handleNotFoundException(NotFoundException ex) {
+        return new ResponseEntity<>(errorService.makeResponse(ex), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -31,4 +31,13 @@ public class ErrorServiceImpl implements ErrorService {
                 .response(reasons)
                 .build();
     }
+
+    @Override
+    public ErrorResponseBody makeResponse(Exception e) {
+        String error = e.getMessage();
+        return ErrorResponseBody.builder()
+                .title(error)
+                .response(Map.of("errors", List.of(error)))
+                .build();
+    }
 }
