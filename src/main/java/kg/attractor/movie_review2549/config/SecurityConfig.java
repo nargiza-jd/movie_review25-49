@@ -17,7 +17,6 @@ import javax.sql.DataSource;
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
-
     private final DataSource dataSource;
 
     @Autowired
@@ -53,5 +52,4 @@ public class SecurityConfig {
                 );
         return http.build();
     }
-
 }
